@@ -1,32 +1,13 @@
-def remove_all_evens(lst):
-    left = 0
-    right = len(lst)-1
-
-    while left < right:
-
-        if lst[right] % 2 == 0:
-            lst.pop()
-            right -= 1
-        
-        if lst[left] %2 != 0:
-            left += 1
-
-        elif lst[left] % 2 == 0 and lst[right] % 2 != 0:
-            lst[left], lst[right] = lst[right],lst[left]
-            lst.pop()
-            left += 1
-            right -= 1
-
-    return lst
-
-        
+def is_sorted(lst,low,high):
+    while low < high:
+        if lst[low] < lst[high]:
+            is_sorted(lst,low+1,high)
+            return True
+        else:
+            return False
+    
 
 
 
-
-
-
-
-
-lst = [2, 3, 5, 2, 16, 13]
-print(remove_all_evens(lst))
+lst = [-1, 3, 2, 8, 12, 15, 31]
+print(is_sorted(lst, 0, 6))
