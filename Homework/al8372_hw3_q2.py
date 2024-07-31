@@ -2,29 +2,29 @@ from ArrayStack import ArrayStack
 
 class MaxStack:
     def __init__(self):
-        self.data = ArrayStack()
+        self.stack = ArrayStack()
         self.maxval = None
 
     def is_empty(self):
-        return self.data.is_empty()
+        return self.stack.is_empty()
 
     def __len__(self):
-        return len(self.data)
+        return len(self.stack)
 
     def push(self, item):
-        self.data.push((item , self.maxval))
+        self.stack.push((item , self.maxval))
         if self.maxval is None or item > self.maxval:
             self.maxval = item
 
     def top(self):
         if self.is_empty():
             raise Exception("Empty stack")
-        return self.data.top()[0]
+        return self.stack.top()[0]
 
     def pop(self):
         if self.is_empty():
             raise Exception("Empty stack")
-        result = self.data.pop()
+        result = self.stack.pop()
         if result[1] is None or result[0] > result[1]:
             self.maxval = result[1]
         return result[0]
