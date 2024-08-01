@@ -1,49 +1,63 @@
 from ArrayStack import ArrayStack
 
+maths = '+-*/'
+vars = []
+var_vals = []
 
-class MaxStack:
-    def __init__(self):
-        self.data = ArrayStack()
-        self.maximum = None
+ui = ''
+while ui != 'done()' or ui != 'done ()':
+    s = ArrayStack()
+    ui = input('-->')
+    lst = ui.strip().split()
 
-    def is_empty(self):
-        return self.data.is_empty()
-
-    def __len__(self):
-        return len(self.data)
-
-    def push(self, elem):
-        self.data.push((elem, self.maximum))
-        if self.maximum is None or elem > self.maximum:
-            self.maximum = elem
-
-    def top(self):
-        if self.is_empty():
-            raise Exception("MaxStack is empty")
-        return self.data.top()[0]
-
-    def pop(self):
-        if self.is_empty():
-            raise Exception("MaxStack is empty")
-        return_tup = self.data.pop()
-        if return_tup[1] is None or return_tup[0] > return_tup[1]:
-            self.maximum = return_tup[1]
-        return return_tup[0]
-
-    def max(self):
-        if self.is_empty():
-            raise Exception("MaxStack is empty")
-        return self.maximum
+    if ui == 'done()' or ui == 'done ()':
+        break
     
-
-
-
-maxS = MaxStack()
-maxS.push(3)
-maxS.push(1)
-maxS.push(6)
-maxS.push(4)
-maxS.max()
-maxS.pop()
-maxS.pop()
-print(maxS.max())
+    if '=' in lst:
+        variable = lst[0]
+        expression = lst[2:]
+        
+        for each in expression:
+            if each.isdigit():
+                s.push(int(each))
+            elif each in vars:
+                s.push(var_vals[vars.index(each)])
+            elif each in maths:
+                num2 = s.pop()
+                num1 = s.pop()
+                if each == '+':
+                    s.push(num1 + num2)
+                elif each == '-':
+                    s.push(num1 - num2)
+                elif each == '*':
+                    s.push(num1 * num2)
+                elif each == '/':
+                    s.push(num1 / num2)
+        
+        value = s.pop()
+        if variable in vars:
+            var_vals[vars.index(variable)] = value
+        else:
+            vars.append(variable)
+            var_vals.append(value)
+        print(variable)
+    else:
+        for each in lst:
+            if each.isdigit():
+                s.push(int(each))
+            elif each in vars:
+                s.push(var_vals[vars.index(each)])
+            elif each in maths:
+                num2 = s.pop()
+                num1 = s.pop()
+                if each == '+':
+                    s.push(num1 + num2)
+                elif each == '-':
+                    s.push(num1 - num2)
+                elif each == '*':
+                    s.push(num1 * num2)
+                elif each == '/':
+                    s.push(num1 / num2)
+        
+        result = s.pop()
+        print(result)
