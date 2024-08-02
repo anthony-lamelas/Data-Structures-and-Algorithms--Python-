@@ -4,18 +4,17 @@ maths = '+-*/'
 vars = []
 var_vals = []
 
-ui = input('-->')
+ui = input('--> ')
 while ui != 'done()':
-
     s = ArrayStack()
-    lst = ui.strip().split()
+    lst = ui.split(" ")
     
     if '=' in lst:
         variable = lst[0]
         expression = lst[2:]
         
         for each in expression:
-            if each.isdigit():
+            if each.lstrip('-').isdigit():  
                 s.push(int(each))
             elif each in vars:
                 s.push(var_vals[vars.index(each)])
@@ -29,6 +28,8 @@ while ui != 'done()':
                 elif each == '*':
                     s.push(num1 * num2)
                 elif each == '/':
+                    if num2 == 0:  
+                        raise ZeroDivisionError
                     s.push(num1 / num2)
         
         value = s.pop()
@@ -40,7 +41,7 @@ while ui != 'done()':
         print(variable)
     else:
         for each in lst:
-            if each.isdigit():
+            if each.lstrip('-').isdigit():  
                 s.push(int(each))
             elif each in vars:
                 s.push(var_vals[vars.index(each)])
@@ -54,8 +55,10 @@ while ui != 'done()':
                 elif each == '*':
                     s.push(num1 * num2)
                 elif each == '/':
+                    if num2 == 0: 
+                        raise ZeroDivisionError
                     s.push(num1 / num2)
         
         result = s.pop()
         print(result)
-    ui = input('-->')
+    ui = input('--> ')

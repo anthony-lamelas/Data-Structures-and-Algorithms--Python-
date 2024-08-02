@@ -68,20 +68,5 @@ class ArrayQueue:
         return self.data_arr[self.front]
  
 
-Q = ArrayQueue()
-for i in range(10):
-    Q.enqueue(i+100)
-print(len(Q))
-print(Q.is_empty())
-Q.enqueue(500)
-print(Q.dequeue())    
-Q.enqueue(200)
-#Q.enqueue(201)
-for i in range(10):
-    print(Q.dequeue())
-    
-print(len(Q))
-Q.enqueue(201)
-print(len(Q))
-print(Q.dequeue())    
+  
 
