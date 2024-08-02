@@ -4,14 +4,11 @@ maths = '+-*/'
 vars = []
 var_vals = []
 
-ui = ''
-while ui != 'done()' or ui != 'done ()':
-    s = ArrayStack()
-    ui = input('-->')
-    lst = ui.strip().split()
+ui = input('-->')
+while ui != 'done()':
 
-    if ui == 'done()' or ui == 'done ()':
-        break
+    s = ArrayStack()
+    lst = ui.strip().split()
     
     if '=' in lst:
         variable = lst[0]
@@ -61,3 +58,4 @@ while ui != 'done()' or ui != 'done ()':
         
         result = s.pop()
         print(result)
+    ui = input('-->')
