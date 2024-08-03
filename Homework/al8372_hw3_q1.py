@@ -8,7 +8,9 @@ ui = input('--> ')
 while ui != 'done()':
     s = ArrayStack()
     lst = ui.split(" ")
-    
+
+
+
     if '=' in lst:
         variable = lst[0]
         expression = lst[2:]
