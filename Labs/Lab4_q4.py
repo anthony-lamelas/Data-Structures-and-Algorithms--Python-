@@ -11,6 +11,7 @@ def bt_even_sum(root):
 
     return current_value +left+right
 
-def bt_contains(root, val):
+    def bt_contains(root, val):
+        pass
 
     
