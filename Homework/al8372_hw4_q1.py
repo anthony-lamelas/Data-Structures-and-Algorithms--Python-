@@ -43,7 +43,6 @@ class CompactString:
         self_node = self.data.header.next
         other_node = other.data.header.next
         
-
         
         while self_node is not self.data.trailer and other_node is not other.data.trailer:
             if self_node.data[0] < other_node.data[0]:
@@ -58,8 +57,6 @@ class CompactString:
                     return True
                 elif self_node.data[1] < other_node.data[1]:
                     return False
-
-
 
             self_node = self_node.next
             other_node = other_node.next
@@ -108,4 +105,4 @@ class CompactString:
 s1 = CompactString('aaaaaaacccaaaaa')
 s2 = CompactString('aaaaaaacccaaaa')
 
-print(s1<s2)
+print(s1)
