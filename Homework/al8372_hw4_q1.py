@@ -67,8 +67,6 @@ class CompactString:
                             return True
                     else:
                         return False
-                    #aaa   self
-                    #aaaa    other
                 elif self_node.data[1] < other_node.data[1]:
                     if self_node.next.data is not None:
                         if self_node.next.data[0] > other_node.data[0]:
@@ -107,8 +105,6 @@ class CompactString:
                             return True
                     else:
                         return False
-                    #aaa   self
-                    #aaaa    other
                 elif self_node.data[1] < other_node.data[1]:
                     if self_node.next.data is not None:
                         if self_node.next.data[0] > other_node.data[0]:
@@ -144,22 +140,4 @@ class CompactString:
 
 
 
-
-# s1 = CompactString('aaaaaaacccaaaaa')
-# s2 = CompactString('aaaaaaacccaaaa') 
-
-# print(s1 > s2) #true
-
-# c1 = CompactString('aaaaabbbaaac')
-# c2 = CompactString('aaaaaaacccaaaa')
-
-# print( c1 <= c2) #false
-
-
-
-
-# d1 = CompactString('aaaaa')
-# d2 = CompactString('aaaaa')
-
-# print(d1 <= d2) #true
 
