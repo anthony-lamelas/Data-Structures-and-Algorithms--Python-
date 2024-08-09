@@ -21,6 +21,14 @@ class CompactString:
         self_node = self.data.header.next
         other_node = other.data.header.next
         
+        if other.data.is_empty() and self.data.is_empty():
+            return CompactString('')
+        
+        elif other.data.is_empty():
+            return self
+        elif self.data.is_empty():
+            return other
+        
         while self_node is not self.data.trailer:
             new.add_last(self_node.data)
             self_node = self_node.next
