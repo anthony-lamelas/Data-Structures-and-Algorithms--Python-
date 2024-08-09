@@ -41,81 +41,62 @@ class CompactString:
     def __lt__(self, other):
         self_node = self.data.header.next
         other_node = other.data.header.next
-        
-        
+
         while self_node is not self.data.trailer and other_node is not other.data.trailer:
             if self_node.data[0] < other_node.data[0]:
                 return True
-
             elif self_node.data[0] > other_node.data[0]:
                 return False
-            
-            else:
-                if self_node.data[1] > other_node.data[1]:
-                    if (other_node.next.data is not None):
-                        if (other_node.next.data[0] < self_node.data[0]):
-                            return False
-                        elif (other_node.next.data[0] > self_node.data[0]):
-                            return True
-                    else:
-                        return False
-                    #aaa   self
-                    #aaaa    other
-                elif self_node.data[1] < other_node.data[1]:
-                    if self_node.next.data is not None:
-                        if self_node.next.data[0] > other_node.data[0]:
-                            return False
-                        elif self_node.next.data[0] < other_node.data[0]:
-                            return True
-                    else:
+            else:  # Characters are the same
+                if self_node.data[1] < other_node.data[1]:
+                    next_self_node = self_node.next
+                    next_other_node = other_node.next
+                    if next_other_node is not other.data.trailer and \
+                    (next_self_node is self.data.trailer or next_self_node.data[0] < next_other_node.data[0]):
                         return True
-                
-            self_node = self_node.next
-            other_node = other_node.next
-        
+                    return False
+                elif self_node.data[1] > other_node.data[1]:
+                    return False
+                else:
+                    self_node = self_node.next
+                    other_node = other_node.next
+
         if self_node is self.data.trailer and other_node is not other.data.trailer:
             return True
         return False
-    
 
-
-    
     def __le__(self, other):
         self_node = self.data.header.next
         other_node = other.data.header.next
-        
+
         while self_node is not self.data.trailer and other_node is not other.data.trailer:
             if self_node.data[0] < other_node.data[0]:
                 return True
             elif self_node.data[0] > other_node.data[0]:
                 return False
-            
-            else:
-                if self_node.data[1] > other_node.data[1]:
-                    if (other_node.next.data is not None):
-                        if (other_node.next.data[0] < self_node.data[0]):
-                            return False
-                        elif (other_node.next.data[0] > self_node.data[0]):
-                            return True
-                    else:
-                        return False
-                    #aaa   self
-                    #aaaa    other
-                elif self_node.data[1] < other_node.data[1]:
-                    if self_node.next.data is not None:
-                        if self_node.next.data[0] > other_node.data[0]:
-                            return False
-                        elif self_node.next.data[0] < other_node.data[0]:
-                            return True
-                    else:
+            else:  # Characters are the same
+                if self_node.data[1] < other_node.data[1]:
+                    next_self_node = self_node.next
+                    next_other_node = other_node.next
+                    if next_other_node is not other.data.trailer and \
+                    (next_self_node is self.data.trailer or next_self_node.data[0] < next_other_node.data[0]):
                         return True
-                
-            self_node = self_node.next
-            other_node = other_node.next
-        
-        if self_node is self.data.trailer:
+                    return False
+                elif self_node.data[1] > other_node.data[1]:
+                    return False
+                else:
+                    self_node = self_node.next
+                    other_node = other_node.next
+
+        if self_node is self.data.trailer and other_node is not other.data.trailer:
+            return True
+        if self_node is self.data.trailer and other_node is self.data.trailer:
             return True
         return False
+
+
+        
+        
     
     def __gt__(self, other):
         return not self <= other
@@ -137,21 +118,18 @@ class CompactString:
 
 
 
-# s1 = CompactString('aaaaaaacccaaaaa')
-# s2 = CompactString('aaaaaaacccaaaa') 
+s1 = CompactString('aaaaaaacccaaaaa')
+s2 = CompactString('aaaaaaacccaaaa') 
 
-# print(s1 > s2) #true
+print(s1 > s2) #true
 
-# c1 = CompactString('aaaaabbbaaac')
-# c2 = CompactString('aaaaaaacccaaaa')
+c1 = CompactString('aaaaabbbaaac')
+c2 = CompactString('aaaaaaacccaaaa')
 
-# print( c1 <= c2) #false
+print( c1 <= c2) #false
 
+d1 = CompactString('aaaaa')
+d2 = CompactString('aaaaa')
 
-
-
-# d1 = CompactString('aaaaa')
-# d2 = CompactString('aaaaa')
-
-# print(d1 <= d2) #true
+print(d1 <= d2) #true
 

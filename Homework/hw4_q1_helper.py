@@ -52,33 +52,22 @@ class CompactString:
             
             else:
                 if self_node.data[1] > other_node.data[1]:
-                    if (other_node.next.data is not None):
-                        if (other_node.next.data[0] < self_node.data[0]):
-                            return False
-                        elif (other_node.next.data[0] > self_node.data[0]):
-                            return True
-                    else:
+                    if (other_node.next.data is not None) and (other_node.next.data[0] < self_node.data[0]):
                         return False
-                    #aaa   self
-                    #aaaa    other
-                elif self_node.data[1] < other_node.data[1]:
-                    if self_node.next.data is not None:
-                        if self_node.next.data[0] > other_node.data[0]:
-                            return False
-                        elif self_node.next.data[0] < other_node.data[0]:
-                            return True
                     else:
+
                         return True
-                
+                elif self_node.data[1] < other_node.data[1]:
+                    if (self_node.next.data is not None) and (other_node.data[0] > self_node.next.data[0]):
+                        return True
+                    return False
+
             self_node = self_node.next
             other_node = other_node.next
         
         if self_node is self.data.trailer and other_node is not other.data.trailer:
             return True
         return False
-    
-
-
     
     def __le__(self, other):
         self_node = self.data.header.next
@@ -92,30 +81,21 @@ class CompactString:
             
             else:
                 if self_node.data[1] > other_node.data[1]:
-                    if (other_node.next.data is not None):
-                        if (other_node.next.data[0] < self_node.data[0]):
-                            return False
-                        elif (other_node.next.data[0] > self_node.data[0]):
-                            return True
-                    else:
+                    if (other_node.next.data is not None) and (other_node.next.data[0] < self_node.data[0]):
                         return False
-                    #aaa   self
-                    #aaaa    other
-                elif self_node.data[1] < other_node.data[1]:
-                    if self_node.next.data is not None:
-                        if self_node.next.data[0] > other_node.data[0]:
-                            return False
-                        elif self_node.next.data[0] < other_node.data[0]:
-                            return True
                     else:
                         return True
+                elif self_node.data[1] < other_node.data[1]:
+                    if (self_node.next.data is not None) and (other_node.data[0] > self_node.next.data[0]):
+                        return True
+                    return False
                 
             self_node = self_node.next
             other_node = other_node.next
         
         if self_node is self.data.trailer:
             return True
-        return False
+        return True
     
     def __gt__(self, other):
         return not self <= other
@@ -137,21 +117,18 @@ class CompactString:
 
 
 
-# s1 = CompactString('aaaaaaacccaaaaa')
-# s2 = CompactString('aaaaaaacccaaaa') 
+s1 = CompactString('aaaaaaacccaaaaa')
+s2 = CompactString('aaaaaaacccaaaa') 
 
-# print(s1 > s2) #true
+print(s1 > s2) #true
 
-# c1 = CompactString('aaaaabbbaaac')
-# c2 = CompactString('aaaaaaacccaaaa')
+c1 = CompactString('aaaaabbbaaac')
+c2 = CompactString('aaaaaaacccaaaa')
 
-# print( c1 <= c2) #false
+print( c1 <= c2) #false
 
+d1 = CompactString('aaaaa')
+d2 = CompactString('aaaaa')
 
-
-
-# d1 = CompactString('aaaaa')
-# d2 = CompactString('aaaaa')
-
-# print(d1 <= d2) #true
+print(d1 <= d2) #true
 
