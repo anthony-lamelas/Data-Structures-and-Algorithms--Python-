@@ -70,4 +70,16 @@ class DoublyLinkedList:
 
     def __repr__(self):
         return "[" + " <--> ".join([str(elem) for elem in self]) + "]"
+    
+    def switch_first(self,lst2):
+        node1 = self.header.next
+        node2 = self.header.next
+
+        lst2.header.next = node1
+        node1.prev = lst2.header
+        node1.next = node2.next
+
+        self.header.next = node2
+        node2.prev = self.header
+        node2.next = self.header.next.next
 
