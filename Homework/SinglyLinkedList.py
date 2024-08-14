@@ -35,9 +35,10 @@ class SinglyLinkedList:
         # Delete all the nodes whose node.data = val
         # Write your code here
         node = self.header.next
-        for i in range (len(self)):
+        while node is not self.trailer:
             if node.data == val:
                 node.prev.next = node.next
+                node.next.prev = node.prev
             node = node.next
             
 

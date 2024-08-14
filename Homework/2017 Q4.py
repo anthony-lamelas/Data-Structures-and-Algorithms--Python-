@@ -1,3 +1,6 @@
+
+
+'''
 def is_sum_balanced(bin_tree):
     # If the tree is empty, it is considered balanced.
     if bin_tree.is_empty():
@@ -22,3 +25,21 @@ def is_subtree_sum_balanced(root):
     
     # The current subtree is balanced if both subtrees are balanced and the current node is balanced.
     return (total_sum, left_balanced and right_balanced and is_balanced)
+
+    '''
+
+
+
+
+def is_sum_balanced(bin_tree):
+    def is_subtree_sum_balanced(root):
+        if root is None:
+            return (0, True)
+        
+        left_sum, left_tree = is_subtree_sum_balanced(root.left)
+        right_sum, right_tree = is_subtree_sum_balanced(root.right)
+
+        return (abs(left_sum - right_sum) <= 1, left_sum+right_sum+root.data)
+        
+
+    return is_subtree_sum_balanced(bin_tree.root)[1]

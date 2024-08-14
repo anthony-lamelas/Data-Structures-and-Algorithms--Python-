@@ -73,13 +73,15 @@ class DoublyLinkedList:
     
     def switch_first(self,lst2):
         node1 = self.header.next
-        node2 = self.header.next
-
-        lst2.header.next = node1
-        node1.prev = lst2.header
-        node1.next = node2.next
+        node2 = lst2.header.next
 
         self.header.next = node2
-        node2.prev = self.header
-        node2.next = self.header.next.next
+        lst2.header.next = node1
+
+        node2.next.prev = node1
+        node1.next.prev = node2
+
+        node1.next,node2.next = node2.next, node1.next
+
+        node1.prev,node2.prev = node2.prev,node1.prev
 
